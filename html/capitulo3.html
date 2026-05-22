@@ -1,2642 +1,480 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
    
-     <title>Capitulo 3</title>
+    <title>Capitulo 3 - CSS: Formatando com Folhas de Estilo</title>
     <style>
-        body {
-         
-        }	
+        body { font-family: arial, line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; }
     </style>
-
 </head>
 <body>
 
 <h1>Capitulo 3</h1>
-<h2>CSS: Formatando com Estilo</h2>
+<h2>CSS: Formatando com Folhas de Estilo</h2>
 
-<p>Este capitulo aborda os fundamentos e conceitos avancados de CSS (Cascading Style Sheets), a linguagem usada para estilizar documentos HTML. CSS controla a apresentacao visual de paginas web, separando o conteudo (HTML) da aparencia (CSS).</p>
+<p>Este capitulo aborda os fundamentos de CSS (Cascading Style Sheets), a linguagem usada para estilizar documentos HTML, separando conteudo (HTML) da apresentacao (CSS).</p>
 
 <br><br>
-
 
 <h2>3.1 Introducao ao CSS</h2>
 
 <br>
 
-<h3>3.1.1 O que e CSS?</h3>
+<h3>O que e CSS?</h3>
 
-<p>CSS significa Cascading Style Sheets (Folhas de Estilo em Cascata). E uma linguagem de estilo usada para descrever a apresentacao de um documento escrito em HTML ou XML. CSS descreve como os elementos devem ser renderizados na tela, no papel, na fala ou em outras midias.</p>
-
-<p>A principal vantagem do CSS e a separacao entre conteudo e apresentacao. Isso permite:</p>
+<p>CSS significa Cascading Style Sheets. E uma linguagem de estilo para descrever a apresentacao de documentos HTML. Principais vantagens:</p>
 
 <ul>
-    <li>Maior controle sobre o layout e aparencia</li>
+    <li>Maior controle sobre layout e aparencia</li>
     <li>Reutilizacao de estilos em multiplas paginas</li>
     <li>Facilidade de manutencao</li>
     <li>Melhor acessibilidade</li>
-    <li>Carregamento mais rapido das paginas</li>
 </ul>
 
 <br>
 
-<h3>3.1.2 Estrutura de uma Regra CSS</h3>
+<h3>Estrutura de uma Regra CSS</h3>
 
-<p>Uma regra CSS consiste em um seletor e um bloco de declaracao:</p>
-
-
-
-<p><strong>Exemplo:</strong></p>
-
- p{<br>
-    color: blue;<br>
-    font-size: 16px;<br>
-    margin-bottom: 10px;<br>
-
+<pre>
+seletor {
+    propriedade: valor;
 }
 
-<p>Neste exemplo:</p>
-<ul>
-    <li><code>p</code> e o seletor (seleciona todos os paragrafos)</li>
-    <li><code>color</code>, <code>font-size</code> e <code>margin-bottom</code> sao propriedades</li>
-    <li><code>blue</code>, <code>16px</code> e <code>10px</code> sao valores</li>
-</ul>
-
-<br>
-
-<h3>3.1.3 Tres Formas de Incluir CSS</h3>
-
-<p>Existem tres maneiras de aplicar CSS a um documento HTML:</p>
-
-<br>
-
-<h4>1. CSS Inline (Estilo em Linha)</h4>
-
-<p>O estilo e aplicado diretamente no elemento HTML usando o atributo <code>style</code>:</p>
-
-<pre>
-&lt;p style="color: red; font-size: 18px;"&gt;Este paragrafo e vermelho.&lt;/p&gt;
-</pre>
-
-<p><strong>Vantagens:</strong> Rapido para testar, especificidade alta.</p>
-<p><strong>Desvantagens:</strong> Dificil de manter, nao reutilizavel, mistura conteudo com apresentacao.</p>
-
-<br>
-
-<h4>2. CSS Interno (Estilo Incorporado)</h4>
-
-<p>O estilo e definido dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code> do documento:</p>
-
-<pre>
-&lt;head&gt;
-    &lt;style&gt;
-        p {
-            color: blue;
-            font-size: 16px;
-        }
-        h1 {
-            color: green;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-</pre>
-
-<p><strong>Vantagens:</strong> Estilos especificos para uma unica pagina, sem requisicoes HTTP adicionais.</p>
-<p><strong>Desvantagens:</strong> Nao reutilizavel entre paginas, aumenta o tamanho do HTML.</p>
-
-<br>
-
-<h4>3. CSS Externo (Folha de Estilo Externa)</h4>
-
-<p>O estilo e definido em um arquivo <code>.css</code> separado e vinculado ao HTML:</p>
-
-<pre>
-&lt;head&gt;
-    &lt;link rel="stylesheet" href="estilos.css"&gt;
-&lt;/head&gt;
-</pre>
-
-<p>Conteudo do arquivo <code>estilos.css</code>:</p>
-
-<pre>
+/* Exemplo */
 p {
     color: blue;
     font-size: 16px;
 }
-h1 {
-    color: green;
-}
 </pre>
 
-<p><strong>Vantagens:</strong> Reutilizavel, facil manutencao, cache do navegador, separacao completa.</p>
-<p><strong>Desvantagens:</strong> Requisicao HTTP adicional.</p>
+<br>
+
+<h3>Tres Formas de Incluir CSS</h3>
+
+<p><strong>1. CSS Inline:</strong></p>
+<pre>&lt;p style="color: red;"&gt;Texto vermelho&lt;/p&gt;</pre>
+
+<p><strong>2. CSS Interno:</strong></p>
+<pre>
+&lt;head&gt;
+    &lt;style&gt;
+        p { color: blue; }
+    &lt;/style&gt;
+&lt;/head&gt;
+</pre>
+
+<p><strong>3. CSS Externo:</strong></p>
+<pre>&lt;link rel="stylesheet" href="estilos.css"&gt;</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.2 Seletores CSS</h2>
 
-<p>Seletores sao padroes usados para selecionar os elementos HTML que voce deseja estilizar. Existem varios tipos de seletores:</p>
-
 <br>
 
-<h3>3.2.1 Seletores Basicos</h3>
-
-<br>
+<h3>Seletores Basicos</h3>
 
 <table>
-    <tr>
-        <th>Seletor</th>
-        <th>Exemplo</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td>Seletor de Tipo (Elemento)</td>
-        <td><code>p</code></td>
-        <td>Seleciona todos os elementos <code>&lt;p&gt;</code></td>
-    </tr>
-    <tr>
-        <td>Seletor de Classe</td>
-        <td><code>.minhaClasse</code></td>
-        <td>Seleciona todos os elementos com <code>class="minhaClasse"</code></td>
-    </tr>
-    <tr>
-        <td>Seletor de ID</td>
-        <td><code>#meuId</code></td>
-        <td>Seleciona o elemento com <code>id="meuId"</code></td>
-    </tr>
-    <tr>
-        <td>Seletor Universal</td>
-        <td><code>*</code></td>
-        <td>Seleciona todos os elementos</td>
-    </tr>
+    <tr><th>Seletor</th><th>Exemplo</th><th>Descricao</th></tr>
+    <tr><td>Tipo</td><td><code>p</code></td><td>Seleciona todos os &lt;p&gt;</td></tr>
+    <tr><td>Classe</td><td><code>.classe</code></td><td>Seleciona elementos com class="classe"</td></tr>
+    <tr><td>ID</td><td><code>#id</code></td><td>Seleciona elemento com id="id"</td></tr>
+    <tr><td>Universal</td><td><code>*</code></td><td>Seleciona todos os elementos</td></tr>
 </table>
 
 <br>
 
-<p><strong>Exemplos de uso:</strong></p>
-
-<pre>
-/* Seletor de tipo */
-h1 {
-    font-size: 32px;
-}
-
-/* Seletor de classe */
-.destaque {
-    background-color: yellow;
-}
-
-/* Seletor de ID */
-#cabecalho {
-    background-color: #333;
-    color: white;
-}
-
-/* Seletor universal */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-</pre>
-
-<br>
-
-<h3>3.2.2 Seletores de Atributo</h3>
-
-<p>Seletores de atributo permitem selecionar elementos com base em seus atributos e valores:</p>
-
-<br>
+<h3>Seletores de Atributo</h3>
 
 <table>
-    <tr>
-        <th>Seletor</th>
-        <th>Exemplo</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>[atributo]</code></td>
-        <td><code>[title]</code></td>
-        <td>Elementos que possuem o atributo title</td>
-    </tr>
-    <tr>
-        <td><code>[atributo=valor]</code></td>
-        <td><code>[type="text"]</code></td>
-        <td>Elementos com type exatamente igual a "text"</td>
-    </tr>
-    <tr>
-        <td><code>[atributo~=valor]</code></td>
-        <td><code>[class~="btn"]</code></td>
-        <td>Elementos cuja classe contem a palavra "btn"</td>
-    </tr>
-    <tr>
-        <td><code>[atributo|=valor]</code></td>
-        <td><code>[lang|="pt"]</code></td>
-        <td>Elementos com lang igual a "pt" ou comecando com "pt-"</td>
-    </tr>
-    <tr>
-        <td><code>[atributo^=valor]</code></td>
-        <td><code>[href^="https"]</code></td>
-        <td>Elementos cujo href comeca com "https"</td>
-    </tr>
-    <tr>
-        <td><code>[atributo$=valor]</code></td>
-        <td><code>[href$=".pdf"]</code></td>
-        <td>Elementos cujo href termina com ".pdf"</td>
-    </tr>
-    <tr>
-        <td><code>[atributo*=valor]</code></td>
-        <td><code>[href*="google"]</code></td>
-        <td>Elementos cujo href contem "google"</td>
-    </tr>
+    <tr><th>Seletor</th><th>Descricao</th></tr>
+    <tr><td><code>[atributo]</code></td><td>Elementos com o atributo</td></tr>
+    <tr><td><code>[atributo=valor]</code></td><td>Atributo igual ao valor</td></tr>
+    <tr><td><code>[atributo^=valor]</code></td><td>Atributo comeca com valor</td></tr>
+    <tr><td><code>[atributo$=valor]</code></td><td>Atributo termina com valor</td></tr>
+    <tr><td><code>[atributo*=valor]</code></td><td>Atributo contem valor</td></tr>
 </table>
 
 <br>
 
-<p><strong>Exemplos praticos:</strong></p>
-
-<pre>
-/* Links externos */
-a[href^="http"] {
-    color: blue;
-}
-
-/* Links para PDFs */
-a[href$=".pdf"] {
-    color: red;
-}
-
-/* Inputs de texto */
-input[type="text"] {
-    border: 1px solid #ccc;
-    padding: 5px;
-}
-
-/* Elementos com atributo title */
-[title] {
-    cursor: help;
-}
-</pre>
-
-<br>
-
-<h3>3.2.3 Seletores de Combinacao</h3>
-
-<p>Combinadores permitem selecionar elementos com base em sua relacao com outros elementos:</p>
-
-<br>
+<h3>Combinadores</h3>
 
 <table>
-    <tr>
-        <th>Combinador</th>
-        <th>Exemplo</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td>Descendente (espaco)</td>
-        <td><code>div p</code></td>
-        <td>Todos os <code>&lt;p&gt;</code> dentro de <code>&lt;div&gt;</code> (qualquer nivel)</td>
-    </tr>
-    <tr>
-        <td>Filho direto (&gt;)</td>
-        <td><code>div &gt; p</code></td>
-        <td>Todos os <code>&lt;p&gt;</code> que sao filhos diretos de <code>&lt;div&gt;</code></td>
-    </tr>
-    <tr>
-        <td>Irmao adjacente (+)</td>
-        <td><code>h1 + p</code></td>
-        <td>O primeiro <code>&lt;p&gt;</code> imediatamente apos um <code>&lt;h1&gt;</code></td>
-    </tr>
-    <tr>
-        <td>Irmaos gerais (~)</td>
-        <td><code>h1 ~ p</code></td>
-        <td>Todos os <code>&lt;p&gt;</code> que sao irmaos de <code>&lt;h1&gt;</code></td>
-    </tr>
+    <tr><th>Combinador</th><th>Exemplo</th><th>Descricao</th></tr>
+    <tr><td>Descendente</td><td><code>div p</code></td><td>Todos os p dentro de div</td></tr>
+    <tr><td>Filho direto</td><td><code>div &gt; p</code></td><td>p filhos diretos de div</td></tr>
+    <tr><td>Irmao adjacente</td><td><code>h1 + p</code></td><td>p imediatamente apos h1</td></tr>
+    <tr><td>Irmaos gerais</td><td><code>h1 ~ p</code></td><td>Todos os p irmaos de h1</td></tr>
 </table>
-
-<br>
-
-<p><strong>Exemplos:</strong></p>
-
-<pre>
-/* Todos os links dentro de nav */
-nav a {
-    text-decoration: none;
-}
-
-/* Apenas filhos diretos li de ul */
-ul &gt; li {
-    list-style: square;
-}
-
-/* Paragrafo imediatamente apos h2 */
-h2 + p {
-    font-weight: bold;
-}
-
-/* Todos os paragrafos irmaos de h2 */
-h2 ~ p {
-    margin-left: 20px;
-}
-</pre>
-
-<br>
-
-<h3>3.2.4 Agrupamento de Seletores</h3>
-
-<p>Para aplicar os mesmos estilos a varios seletores, separe-os com virgulas:</p>
-
-<pre>
-h1, h2, h3 {
-    font-family: Arial, sans-serif;
-    color: #333;
-}
-
-.btn-primary, .btn-secondary, .btn-danger {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.3 Pseudo-classes</h2>
 
-<p>Pseudo-classes sao usadas para definir um estado especial de um elemento. Elas permitem estilizar elementos com base em informacoes que nao estao contidas no documento.</p>
-
 <br>
 
-<h3>3.3.1 Pseudo-classes de Link</h3>
+<h3>Pseudo-classes de Link e Interacao</h3>
 
 <table>
-    <tr>
-        <th>Pseudo-classe</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>:link</code></td>
-        <td>Links nao visitados</td>
-    </tr>
-    <tr>
-        <td><code>:visited</code></td>
-        <td>Links ja visitados</td>
-    </tr>
-    <tr>
-        <td><code>:hover</code></td>
-        <td>Elemento quando o mouse esta sobre ele</td>
-    </tr>
-    <tr>
-        <td><code>:active</code></td>
-        <td>Elemento no momento do clique</td>
-    </tr>
-    <tr>
-        <td><code>:focus</code></td>
-        <td>Elemento que tem foco (ex: input selecionado)</td>
-    </tr>
+    <tr><th>Pseudo-classe</th><th>Descricao</th></tr>
+    <tr><td><code>:link</code></td><td>Links nao visitados</td></tr>
+    <tr><td><code>:visited</code></td><td>Links visitados</td></tr>
+    <tr><td><code>:hover</code></td><td>Mouse sobre o elemento</td></tr>
+    <tr><td><code>:active</code></td><td>Momento do clique</td></tr>
+    <tr><td><code>:focus</code></td><td>Elemento com foco</td></tr>
 </table>
 
 <br>
 
-<p><strong>Ordem LVHA:</strong> E importante definir estas pseudo-classes na ordem correta: <code>:link</code>, <code>:visited</code>, <code>:hover</code>, <code>:active</code>.</p>
-
-<pre>
-a:link {
-    color: blue;
-}
-
-a:visited {
-    color: purple;
-}
-
-a:hover {
-    color: red;
-    text-decoration: underline;
-}
-
-a:active {
-    color: orange;
-}
-
-input:focus {
-    border-color: blue;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
-}
-</pre>
-
-<br>
-
-<h3>3.3.2 Pseudo-classes Estruturais</h3>
+<h3>Pseudo-classes Estruturais</h3>
 
 <table>
-    <tr>
-        <th>Pseudo-classe</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>:first-child</code></td>
-        <td>Primeiro filho de seu pai</td>
-    </tr>
-    <tr>
-        <td><code>:last-child</code></td>
-        <td>Ultimo filho de seu pai</td>
-    </tr>
-    <tr>
-        <td><code>:nth-child(n)</code></td>
-        <td>Enesimo filho de seu pai</td>
-    </tr>
-    <tr>
-        <td><code>:nth-last-child(n)</code></td>
-        <td>Enesimo filho contando do final</td>
-    </tr>
-    <tr>
-        <td><code>:first-of-type</code></td>
-        <td>Primeiro elemento daquele tipo</td>
-    </tr>
-    <tr>
-        <td><code>:last-of-type</code></td>
-        <td>Ultimo elemento daquele tipo</td>
-    </tr>
-    <tr>
-        <td><code>:nth-of-type(n)</code></td>
-        <td>Enesimo elemento daquele tipo</td>
-    </tr>
-    <tr>
-        <td><code>:only-child</code></td>
-        <td>Elemento que e o unico filho</td>
-    </tr>
-    <tr>
-        <td><code>:only-of-type</code></td>
-        <td>Unico elemento daquele tipo</td>
-    </tr>
-    <tr>
-        <td><code>:empty</code></td>
-        <td>Elementos sem filhos</td>
-    </tr>
+    <tr><th>Pseudo-classe</th><th>Descricao</th></tr>
+    <tr><td><code>:first-child</code></td><td>Primeiro filho</td></tr>
+    <tr><td><code>:last-child</code></td><td>Ultimo filho</td></tr>
+    <tr><td><code>:nth-child(n)</code></td><td>Enesimo filho</td></tr>
+    <tr><td><code>:nth-child(odd)</code></td><td>Filhos impares</td></tr>
+    <tr><td><code>:nth-child(even)</code></td><td>Filhos pares</td></tr>
+    <tr><td><code>:first-of-type</code></td><td>Primeiro do tipo</td></tr>
+    <tr><td><code>:last-of-type</code></td><td>Ultimo do tipo</td></tr>
+    <tr><td><code>:only-child</code></td><td>Filho unico</td></tr>
+    <tr><td><code>:empty</code></td><td>Elementos vazios</td></tr>
+    <tr><td><code>:not(seletor)</code></td><td>Negacao</td></tr>
 </table>
 
 <br>
 
-<p><strong>Formulas para nth-child:</strong></p>
-
-<ul>
-    <li><code>:nth-child(odd)</code> - elementos impares (1, 3, 5...)</li>
-    <li><code>:nth-child(even)</code> - elementos pares (2, 4, 6...)</li>
-    <li><code>:nth-child(3n)</code> - cada terceiro elemento (3, 6, 9...)</li>
-    <li><code>:nth-child(3n+1)</code> - elementos 1, 4, 7, 10...</li>
-    <li><code>:nth-child(-n+3)</code> - primeiros 3 elementos</li>
-</ul>
-
-<br>
-
-<pre>
-/* Primeiro paragrafo */
-p:first-child {
-    font-weight: bold;
-}
-
-/* Ultimo item da lista */
-li:last-child {
-    border-bottom: none;
-}
-
-/* Linhas alternadas de tabela */
-tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #ffffff;
-}
-
-/* Cada terceiro elemento */
-li:nth-child(3n) {
-    color: red;
-}
-
-/* Primeiros 3 itens */
-li:nth-child(-n+3) {
-    font-weight: bold;
-}
-</pre>
-
-<br>
-
-<h3>3.3.3 Outras Pseudo-classes</h3>
+<h3>Pseudo-classes de Formulario</h3>
 
 <table>
-    <tr>
-        <th>Pseudo-classe</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>:not(seletor)</code></td>
-        <td>Elementos que NAO correspondem ao seletor</td>
-    </tr>
-    <tr>
-        <td><code>:enabled</code></td>
-        <td>Elementos de formulario habilitados</td>
-    </tr>
-    <tr>
-        <td><code>:disabled</code></td>
-        <td>Elementos de formulario desabilitados</td>
-    </tr>
-    <tr>
-        <td><code>:checked</code></td>
-        <td>Checkboxes e radios marcados</td>
-    </tr>
-    <tr>
-        <td><code>:required</code></td>
-        <td>Campos obrigatorios</td>
-    </tr>
-    <tr>
-        <td><code>:optional</code></td>
-        <td>Campos opcionais</td>
-    </tr>
-    <tr>
-        <td><code>:valid</code></td>
-        <td>Campos com valor valido</td>
-    </tr>
-    <tr>
-        <td><code>:invalid</code></td>
-        <td>Campos com valor invalido</td>
-    </tr>
-    <tr>
-        <td><code>:root</code></td>
-        <td>Elemento raiz do documento (html)</td>
-    </tr>
-    <tr>
-        <td><code>:target</code></td>
-        <td>Elemento alvo de um link ancora</td>
-    </tr>
+    <tr><th>Pseudo-classe</th><th>Descricao</th></tr>
+    <tr><td><code>:enabled</code></td><td>Campo habilitado</td></tr>
+    <tr><td><code>:disabled</code></td><td>Campo desabilitado</td></tr>
+    <tr><td><code>:checked</code></td><td>Checkbox/radio marcado</td></tr>
+    <tr><td><code>:required</code></td><td>Campo obrigatorio</td></tr>
+    <tr><td><code>:valid</code></td><td>Campo valido</td></tr>
+    <tr><td><code>:invalid</code></td><td>Campo invalido</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* Todos os botoes exceto o desabilitado */
-button:not(:disabled) {
-    cursor: pointer;
-}
-
-/* Checkbox marcado */
-input[type="checkbox"]:checked + label {
-    text-decoration: line-through;
-}
-
-/* Campo invalido */
-input:invalid {
-    border-color: red;
-}
-
-/* Campo valido */
-input:valid {
-    border-color: green;
-}
-
-/* Elemento alvo de ancora */
-:target {
-    background-color: yellow;
-}
-</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.4 Pseudo-elementos</h2>
 
-<p>Pseudo-elementos permitem estilizar partes especificas de um elemento. Usam a sintaxe com dois-pontos duplos (<code>::</code>).</p>
-
 <br>
 
 <table>
-    <tr>
-        <th>Pseudo-elemento</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>::before</code></td>
-        <td>Insere conteudo antes do conteudo do elemento</td>
-    </tr>
-    <tr>
-        <td><code>::after</code></td>
-        <td>Insere conteudo apos o conteudo do elemento</td>
-    </tr>
-    <tr>
-        <td><code>::first-line</code></td>
-        <td>Primeira linha de um bloco de texto</td>
-    </tr>
-    <tr>
-        <td><code>::first-letter</code></td>
-        <td>Primeira letra de um bloco de texto</td>
-    </tr>
-    <tr>
-        <td><code>::selection</code></td>
-        <td>Parte do texto selecionada pelo usuario</td>
-    </tr>
-    <tr>
-        <td><code>::placeholder</code></td>
-        <td>Texto placeholder de inputs</td>
-    </tr>
-    <tr>
-        <td><code>::marker</code></td>
-        <td>Marcador de itens de lista</td>
-    </tr>
+    <tr><th>Pseudo-elemento</th><th>Descricao</th></tr>
+    <tr><td><code>::before</code></td><td>Insere conteudo antes</td></tr>
+    <tr><td><code>::after</code></td><td>Insere conteudo depois</td></tr>
+    <tr><td><code>::first-line</code></td><td>Primeira linha</td></tr>
+    <tr><td><code>::first-letter</code></td><td>Primeira letra</td></tr>
+    <tr><td><code>::selection</code></td><td>Texto selecionado</td></tr>
+    <tr><td><code>::placeholder</code></td><td>Placeholder de input</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* Capitular (primeira letra grande) */
-p::first-letter {
-    font-size: 3em;
-    float: left;
-    line-height: 1;
-    margin-right: 10px;
-}
-
-/* Primeira linha em negrito */
-p::first-line {
-    font-weight: bold;
-}
-
-/* Adicionar aspas antes e depois de citacoes */
-blockquote::before {
-    content: open-quote;
-    font-size: 2em;
-}
-
-blockquote::after {
-    content: close-quote;
-    font-size: 2em;
-}
-
-/* Icone antes de links externos */
-a[href^="http"]::after {
-    content: " ↗";
-}
-
-/* Estilo de texto selecionado */
-::selection {
-    background-color: yellow;
-    color: black;
-}
-
-/* Placeholder de input */
-input::placeholder {
-    color: #999;
-    font-style: italic;
-}
-
-/* Marcador de lista */
-li::marker {
-    color: red;
-    font-weight: bold;
-}
-</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.5 Cascata, Especificidade e Heranca</h2>
 
 <br>
 
-<h3>3.5.1 A Cascata</h3>
+<h3>A Cascata</h3>
 
-<p>O "C" em CSS significa "Cascading" (Cascata). Quando multiplas regras podem ser aplicadas a um elemento, o navegador usa um algoritmo para determinar qual regra vence. A ordem de prioridade e:</p>
-
+<p>Ordem de prioridade quando multiplas regras se aplicam:</p>
 <ol>
-    <li><strong>Importancia</strong> - Declaracoes com <code>!important</code> tem maior prioridade</li>
-    <li><strong>Origem</strong> - Estilos do autor &gt; estilos do usuario &gt; estilos do navegador</li>
-    <li><strong>Especificidade</strong> - Seletores mais especificos tem maior prioridade</li>
-    <li><strong>Ordem de aparicao</strong> - A ultima regra declarada vence (se especificidade for igual)</li>
+    <li><strong>Importancia</strong> - <code>!important</code> tem maior prioridade</li>
+    <li><strong>Especificidade</strong> - Seletores mais especificos vencem</li>
+    <li><strong>Ordem</strong> - Ultima regra declarada vence</li>
 </ol>
 
 <br>
 
-<h3>3.5.2 Especificidade</h3>
+<h3>Especificidade</h3>
 
-<p>A especificidade e calculada com base nos tipos de seletores usados. Pode ser representada como uma tupla (A, B, C):</p>
-
-<table>
-    <tr>
-        <th>Componente</th>
-        <th>Conta</th>
-        <th>Exemplo</th>
-    </tr>
-    <tr>
-        <td>A</td>
-        <td>Numero de seletores de ID</td>
-        <td><code>#menu</code> = 1</td>
-    </tr>
-    <tr>
-        <td>B</td>
-        <td>Numero de classes, atributos e pseudo-classes</td>
-        <td><code>.btn</code>, <code>[type]</code>, <code>:hover</code> = 1 cada</td>
-    </tr>
-    <tr>
-        <td>C</td>
-        <td>Numero de elementos e pseudo-elementos</td>
-        <td><code>div</code>, <code>::before</code> = 1 cada</td>
-    </tr>
-</table>
-
-<br>
-
-<p><strong>Exemplos de calculo de especificidade:</strong></p>
-
-<table>
-    <tr>
-        <th>Seletor</th>
-        <th>Especificidade (A,B,C)</th>
-        <th>Valor</th>
-    </tr>
-    <tr>
-        <td><code>*</code></td>
-        <td>(0, 0, 0)</td>
-        <td>0</td>
-    </tr>
-    <tr>
-        <td><code>p</code></td>
-        <td>(0, 0, 1)</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td><code>p.texto</code></td>
-        <td>(0, 1, 1)</td>
-        <td>11</td>
-    </tr>
-    <tr>
-        <td><code>p.texto.destaque</code></td>
-        <td>(0, 2, 1)</td>
-        <td>21</td>
-    </tr>
-    <tr>
-        <td><code>#menu</code></td>
-        <td>(1, 0, 0)</td>
-        <td>100</td>
-    </tr>
-    <tr>
-        <td><code>#menu .item</code></td>
-        <td>(1, 1, 0)</td>
-        <td>110</td>
-    </tr>
-    <tr>
-        <td><code>#menu .item a</code></td>
-        <td>(1, 1, 1)</td>
-        <td>111</td>
-    </tr>
-    <tr>
-        <td><code>#menu .item a:hover</code></td>
-        <td>(1, 2, 1)</td>
-        <td>121</td>
-    </tr>
-    <tr>
-        <td><code>div#menu ul li.item a</code></td>
-        <td>(1, 1, 4)</td>
-        <td>114</td>
-    </tr>
-    <tr>
-        <td><code>style="" (inline)</code></td>
-        <td>(1, 0, 0, 0)</td>
-        <td>1000</td>
-    </tr>
-</table>
-
-<br>
-
-<p><strong>Nota sobre !important:</strong> O uso de <code>!important</code> sobrepoe todas as outras regras, mas deve ser evitado pois dificulta a manutencao do codigo. Use apenas como ultimo recurso.</p>
-
-<pre>
-p {
-    color: red !important; /* Sobrepoe todas as outras regras de color para p */
-}
-</pre>
-
-<br>
-
-<h3>3.5.3 Heranca</h3>
-
-<p>Algumas propriedades CSS sao herdadas automaticamente dos elementos pais para os filhos. Isso e util para propriedades como fonte e cor do texto.</p>
-
-<br>
-
-<p><strong>Propriedades que SAO herdadas (exemplos):</strong></p>
+<p>Calculada como (A, B, C):</p>
 <ul>
-    <li><code>color</code></li>
-    <li><code>font-family</code>, <code>font-size</code>, <code>font-weight</code>, <code>font-style</code></li>
-    <li><code>line-height</code></li>
-    <li><code>text-align</code>, <code>text-indent</code>, <code>text-transform</code></li>
-    <li><code>letter-spacing</code>, <code>word-spacing</code></li>
-    <li><code>list-style</code></li>
-    <li><code>visibility</code></li>
-    <li><code>cursor</code></li>
+    <li><strong>A</strong> = IDs (#id)</li>
+    <li><strong>B</strong> = Classes, atributos, pseudo-classes (.classe, [attr], :hover)</li>
+    <li><strong>C</strong> = Elementos, pseudo-elementos (div, ::before)</li>
 </ul>
 
-<br>
-
-<p><strong>Propriedades que NAO sao herdadas (exemplos):</strong></p>
-<ul>
-    <li><code>margin</code>, <code>padding</code></li>
-    <li><code>border</code></li>
-    <li><code>background</code></li>
-    <li><code>width</code>, <code>height</code></li>
-    <li><code>display</code></li>
-    <li><code>position</code></li>
-</ul>
-
-<br>
-
-<p><strong>Valores especiais para controle de heranca:</strong></p>
-
 <table>
-    <tr>
-        <th>Valor</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>inherit</code></td>
-        <td>Forca a heranca do valor do pai</td>
-    </tr>
-    <tr>
-        <td><code>initial</code></td>
-        <td>Usa o valor inicial da propriedade</td>
-    </tr>
-    <tr>
-        <td><code>unset</code></td>
-        <td>Herda se a propriedade for herdavel, senao usa initial</td>
-    </tr>
-    <tr>
-        <td><code>revert</code></td>
-        <td>Reverte para o estilo do user-agent (navegador)</td>
-    </tr>
+    <tr><th>Seletor</th><th>Especificidade</th></tr>
+    <tr><td><code>*</code></td><td>(0, 0, 0)</td></tr>
+    <tr><td><code>p</code></td><td>(0, 0, 1)</td></tr>
+    <tr><td><code>.classe</code></td><td>(0, 1, 0)</td></tr>
+    <tr><td><code>#id</code></td><td>(1, 0, 0)</td></tr>
+    <tr><td><code>div.classe</code></td><td>(0, 1, 1)</td></tr>
+    <tr><td><code>#id .classe p</code></td><td>(1, 1, 1)</td></tr>
+    <tr><td>Inline style</td><td>(1, 0, 0, 0)</td></tr>
 </table>
 
 <br>
 
-<pre>
-/* Forcar heranca de borda */
-.container {
-    border: 2px solid black;
-}
-.container * {
-    border: inherit;
-}
+<h3>Heranca</h3>
 
-/* Resetar para valor inicial */
-a {
-    color: initial;
-}
-
-/* Usar all para resetar todas as propriedades */
-.reset {
-    all: unset;
-}
-</pre>
+<p><strong>Propriedades herdadas:</strong> color, font-family, font-size, line-height, text-align, list-style</p>
+<p><strong>Propriedades NAO herdadas:</strong> margin, padding, border, background, width, height</p>
 
 <br><br>
 
-<hr>
 
-<h2>3.6 Cores em CSS</h2>
-
-<p>CSS oferece varias formas de especificar cores:</p>
+<h2>3.6 Cores</h2>
 
 <br>
 
-<h3>3.6.1 Nomes de Cores</h3>
-
-<p>CSS reconhece 147 nomes de cores predefinidos:</p>
-
-<pre>
-color: red;
-color: blue;
-color: green;
-color: black;
-color: white;
-color: orange;
-color: purple;
-color: pink;
-color: gray;
-color: cyan;
-color: magenta;
-color: lime;
-color: navy;
-color: teal;
-color: maroon;
-color: olive;
-color: silver;
-color: aqua;
-color: fuchsia;
-color: coral;
-color: crimson;
-color: gold;
-color: indigo;
-color: khaki;
-color: lavender;
-color: salmon;
-color: tomato;
-color: turquoise;
-color: violet;
-/* ... e muitos outros */
-</pre>
-
-<br>
-
-<h3>3.6.2 Valores Hexadecimais</h3>
-
-<p>Cores especificadas com valores hexadecimais de 3 ou 6 digitos:</p>
-
-<pre>
-color: #ff0000;    /* vermelho */
-color: #00ff00;    /* verde */
-color: #0000ff;    /* azul */
-color: #ffffff;    /* branco */
-color: #000000;    /* preto */
-color: #f00;       /* vermelho (abreviado) */
-color: #0f0;       /* verde (abreviado) */
-color: #00f;       /* azul (abreviado) */
-color: #fff;       /* branco (abreviado) */
-color: #000;       /* preto (abreviado) */
-color: #ff000080;  /* vermelho com 50% de opacidade (8 digitos) */
-</pre>
-
-<br>
-
-<h3>3.6.3 RGB e RGBA</h3>
-
-<p>Cores especificadas com valores de vermelho, verde e azul (0-255 ou 0%-100%):</p>
-
-<pre>
-color: rgb(255, 0, 0);        /* vermelho */
-color: rgb(0, 255, 0);        /* verde */
-color: rgb(0, 0, 255);        /* azul */
-color: rgb(255, 255, 255);    /* branco */
-color: rgb(0, 0, 0);          /* preto */
-color: rgb(128, 128, 128);    /* cinza */
-
-/* Com porcentagens */
-color: rgb(100%, 0%, 0%);     /* vermelho */
-color: rgb(50%, 50%, 50%);    /* cinza */
-
-/* RGBA - com canal alfa (transparencia) */
-color: rgba(255, 0, 0, 1);    /* vermelho opaco */
-color: rgba(255, 0, 0, 0.5);  /* vermelho 50% transparente */
-color: rgba(255, 0, 0, 0);    /* completamente transparente */
-
-/* Sintaxe moderna (CSS4) */
-color: rgb(255 0 0);          /* sem virgulas */
-color: rgb(255 0 0 / 50%);    /* com alfa */
-</pre>
-
-<br>
-
-<h3>3.6.4 HSL e HSLA</h3>
-
-<p>Cores especificadas com matiz (hue), saturacao e luminosidade:</p>
-
-<ul>
-    <li><strong>Hue (Matiz):</strong> 0-360 graus na roda de cores (0=vermelho, 120=verde, 240=azul)</li>
-    <li><strong>Saturation (Saturacao):</strong> 0%-100% (0%=cinza, 100%=cor pura)</li>
-    <li><strong>Lightness (Luminosidade):</strong> 0%-100% (0%=preto, 50%=cor normal, 100%=branco)</li>
-</ul>
-
-<pre>
-color: hsl(0, 100%, 50%);     /* vermelho */
-color: hsl(120, 100%, 50%);   /* verde */
-color: hsl(240, 100%, 50%);   /* azul */
-color: hsl(0, 0%, 50%);       /* cinza */
-color: hsl(0, 0%, 0%);        /* preto */
-color: hsl(0, 0%, 100%);      /* branco */
-
-/* HSLA - com canal alfa */
-color: hsla(0, 100%, 50%, 0.5);  /* vermelho 50% transparente */
-
-/* Sintaxe moderna */
-color: hsl(0 100% 50%);          /* sem virgulas */
-color: hsl(0 100% 50% / 50%);    /* com alfa */
-</pre>
-
-<br>
-
-<h3>3.6.5 Palavras-chave Especiais</h3>
-
-<pre>
-color: transparent;     /* completamente transparente */
-color: currentColor;    /* usa o valor atual de color */
-color: inherit;         /* herda do elemento pai */
-</pre>
+<table>
+    <tr><th>Formato</th><th>Exemplo</th></tr>
+    <tr><td>Nome</td><td><code>color: red;</code></td></tr>
+    <tr><td>Hexadecimal</td><td><code>color: #ff0000;</code></td></tr>
+    <tr><td>RGB</td><td><code>color: rgb(255, 0, 0);</code></td></tr>
+    <tr><td>RGBA</td><td><code>color: rgba(255, 0, 0, 0.5);</code></td></tr>
+    <tr><td>HSL</td><td><code>color: hsl(0, 100%, 50%);</code></td></tr>
+</table>
 
 <br><br>
 
-<hr>
 
 <h2>3.7 Unidades de Medida</h2>
 
 <br>
 
-<h3>3.7.1 Unidades Absolutas</h3>
-
-<table>
-    <tr>
-        <th>Unidade</th>
-        <th>Descricao</th>
-        <th>Uso</th>
-    </tr>
-    <tr>
-        <td><code>px</code></td>
-        <td>Pixels</td>
-        <td>Mais comum para telas</td>
-    </tr>
-    <tr>
-        <td><code>pt</code></td>
-        <td>Pontos (1pt = 1/72 polegada)</td>
-        <td>Impressao</td>
-    </tr>
-    <tr>
-        <td><code>pc</code></td>
-        <td>Picas (1pc = 12pt)</td>
-        <td>Impressao</td>
-    </tr>
-    <tr>
-        <td><code>in</code></td>
-        <td>Polegadas</td>
-        <td>Impressao</td>
-    </tr>
-    <tr>
-        <td><code>cm</code></td>
-        <td>Centimetros</td>
-        <td>Impressao</td>
-    </tr>
-    <tr>
-        <td><code>mm</code></td>
-        <td>Milimetros</td>
-        <td>Impressao</td>
-    </tr>
-</table>
+<h3>Unidades Absolutas</h3>
+<p><code>px</code> (pixels), <code>pt</code> (pontos), <code>cm</code>, <code>mm</code>, <code>in</code> (polegadas)</p>
 
 <br>
 
-<h3>3.7.2 Unidades Relativas</h3>
-
+<h3>Unidades Relativas</h3>
 <table>
-    <tr>
-        <th>Unidade</th>
-        <th>Descricao</th>
-        <th>Referencia</th>
-    </tr>
-    <tr>
-        <td><code>em</code></td>
-        <td>Relativo ao font-size do elemento pai</td>
-        <td>Se pai tem 16px, 2em = 32px</td>
-    </tr>
-    <tr>
-        <td><code>rem</code></td>
-        <td>Relativo ao font-size do elemento raiz (html)</td>
-        <td>Se html tem 16px, 2rem = 32px</td>
-    </tr>
-    <tr>
-        <td><code>%</code></td>
-        <td>Porcentagem do elemento pai</td>
-        <td>50% da largura do pai</td>
-    </tr>
-    <tr>
-        <td><code>vw</code></td>
-        <td>1% da largura da viewport</td>
-        <td>100vw = largura total da janela</td>
-    </tr>
-    <tr>
-        <td><code>vh</code></td>
-        <td>1% da altura da viewport</td>
-        <td>100vh = altura total da janela</td>
-    </tr>
-    <tr>
-        <td><code>vmin</code></td>
-        <td>1% da menor dimensao da viewport</td>
-        <td>Menor entre vw e vh</td>
-    </tr>
-    <tr>
-        <td><code>vmax</code></td>
-        <td>1% da maior dimensao da viewport</td>
-        <td>Maior entre vw e vh</td>
-    </tr>
-    <tr>
-        <td><code>ch</code></td>
-        <td>Largura do caractere "0"</td>
-        <td>Util para largura de texto</td>
-    </tr>
-    <tr>
-        <td><code>ex</code></td>
-        <td>Altura do caractere "x"</td>
-        <td>Raramente usado</td>
-    </tr>
+    <tr><th>Unidade</th><th>Descricao</th></tr>
+    <tr><td><code>em</code></td><td>Relativo ao font-size do elemento pai</td></tr>
+    <tr><td><code>rem</code></td><td>Relativo ao font-size do root (html)</td></tr>
+    <tr><td><code>%</code></td><td>Porcentagem do elemento pai</td></tr>
+    <tr><td><code>vw</code></td><td>1% da largura da viewport</td></tr>
+    <tr><td><code>vh</code></td><td>1% da altura da viewport</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* Unidades absolutas */
-width: 200px;
-font-size: 12pt;
-
-/* Unidades relativas */
-font-size: 1.5em;    /* 1.5x o tamanho do pai */
-font-size: 1.5rem;   /* 1.5x o tamanho do root */
-width: 50%;          /* 50% da largura do pai */
-height: 100vh;       /* altura total da viewport */
-width: 100vw;        /* largura total da viewport */
-
-/* Combinando unidades com calc() */
-width: calc(100% - 20px);
-height: calc(100vh - 60px);
-font-size: calc(1rem + 1vw);
-</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.8 Tipografia</h2>
 
 <br>
 
-<h3>3.8.1 Propriedades de Fonte</h3>
-
+<h3>Propriedades de Fonte</h3>
 <table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>font-family</code></td>
-        <td>Familia da fonte</td>
-        <td>Nome da fonte ou generica</td>
-    </tr>
-    <tr>
-        <td><code>font-size</code></td>
-        <td>Tamanho da fonte</td>
-        <td>Valor com unidade ou keyword</td>
-    </tr>
-    <tr>
-        <td><code>font-weight</code></td>
-        <td>Peso (espessura) da fonte</td>
-        <td>100-900, normal, bold, lighter, bolder</td>
-    </tr>
-    <tr>
-        <td><code>font-style</code></td>
-        <td>Estilo da fonte</td>
-        <td>normal, italic, oblique</td>
-    </tr>
-    <tr>
-        <td><code>font-variant</code></td>
-        <td>Variante da fonte</td>
-        <td>normal, small-caps</td>
-    </tr>
-    <tr>
-        <td><code>line-height</code></td>
-        <td>Altura da linha</td>
-        <td>Numero, unidade ou porcentagem</td>
-    </tr>
-    <tr>
-        <td><code>font</code></td>
-        <td>Shorthand para todas as propriedades</td>
-        <td>style weight size/line-height family</td>
-    </tr>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>font-family</code></td><td>Familia da fonte</td></tr>
+    <tr><td><code>font-size</code></td><td>Tamanho da fonte</td></tr>
+    <tr><td><code>font-weight</code></td><td>Peso (normal, bold, 100-900)</td></tr>
+    <tr><td><code>font-style</code></td><td>Estilo (normal, italic)</td></tr>
+    <tr><td><code>font-variant</code></td><td>Variante (small-caps)</td></tr>
 </table>
 
 <br>
 
-<pre>
-/* font-family */
-font-family: Arial, Helvetica, sans-serif;
-font-family: "Times New Roman", Times, serif;
-font-family: "Courier New", Courier, monospace;
-font-family: Georgia, serif;
-
-/* Familias genericas */
-font-family: serif;       /* com serifas */
-font-family: sans-serif;  /* sem serifas */
-font-family: monospace;   /* largura fixa */
-font-family: cursive;     /* estilo manuscrito */
-font-family: fantasy;     /* decorativa */
-
-/* font-size */
-font-size: 16px;
-font-size: 1.2em;
-font-size: 1rem;
-font-size: small;    /* xx-small, x-small, small, medium, large, x-large, xx-large */
-font-size: smaller;  /* relativo ao pai */
-font-size: larger;
-
-/* font-weight */
-font-weight: normal;   /* 400 */
-font-weight: bold;     /* 700 */
-font-weight: lighter;
-font-weight: bolder;
-font-weight: 100;      /* Thin */
-font-weight: 200;      /* Extra Light */
-font-weight: 300;      /* Light */
-font-weight: 400;      /* Normal */
-font-weight: 500;      /* Medium */
-font-weight: 600;      /* Semi Bold */
-font-weight: 700;      /* Bold */
-font-weight: 800;      /* Extra Bold */
-font-weight: 900;      /* Black */
-
-/* font-style */
-font-style: normal;
-font-style: italic;
-font-style: oblique;
-
-/* line-height */
-line-height: normal;
-line-height: 1.5;      /* 1.5x o font-size */
-line-height: 24px;
-line-height: 150%;
-
-/* font shorthand */
-font: italic bold 16px/1.5 Arial, sans-serif;
-font: 12pt/1.4 "Times New Roman", serif;
-</pre>
-
-<br>
-
-<h3>3.8.2 Propriedades de Texto</h3>
-
+<h3>Propriedades de Texto</h3>
 <table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>color</code></td>
-        <td>Cor do texto</td>
-        <td>Qualquer valor de cor</td>
-    </tr>
-    <tr>
-        <td><code>text-align</code></td>
-        <td>Alinhamento horizontal</td>
-        <td>left, right, center, justify</td>
-    </tr>
-    <tr>
-        <td><code>text-decoration</code></td>
-        <td>Decoracao do texto</td>
-        <td>none, underline, overline, line-through</td>
-    </tr>
-    <tr>
-        <td><code>text-transform</code></td>
-        <td>Transformacao de caixa</td>
-        <td>none, uppercase, lowercase, capitalize</td>
-    </tr>
-    <tr>
-        <td><code>text-indent</code></td>
-        <td>Recuo da primeira linha</td>
-        <td>Valor com unidade</td>
-    </tr>
-    <tr>
-        <td><code>letter-spacing</code></td>
-        <td>Espacamento entre letras</td>
-        <td>normal ou valor com unidade</td>
-    </tr>
-    <tr>
-        <td><code>word-spacing</code></td>
-        <td>Espacamento entre palavras</td>
-        <td>normal ou valor com unidade</td>
-    </tr>
-    <tr>
-        <td><code>white-space</code></td>
-        <td>Como tratar espacos em branco</td>
-        <td>normal, nowrap, pre, pre-wrap, pre-line</td>
-    </tr>
-    <tr>
-        <td><code>text-shadow</code></td>
-        <td>Sombra do texto</td>
-        <td>offset-x offset-y blur cor</td>
-    </tr>
-    <tr>
-        <td><code>vertical-align</code></td>
-        <td>Alinhamento vertical (inline)</td>
-        <td>baseline, top, middle, bottom, sub, super</td>
-    </tr>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>text-align</code></td><td>Alinhamento (left, center, right, justify)</td></tr>
+    <tr><td><code>text-decoration</code></td><td>Decoracao (underline, line-through, none)</td></tr>
+    <tr><td><code>text-transform</code></td><td>Transformacao (uppercase, lowercase, capitalize)</td></tr>
+    <tr><td><code>line-height</code></td><td>Altura da linha</td></tr>
+    <tr><td><code>letter-spacing</code></td><td>Espacamento entre letras</td></tr>
+    <tr><td><code>word-spacing</code></td><td>Espacamento entre palavras</td></tr>
+    <tr><td><code>text-indent</code></td><td>Recuo da primeira linha</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* text-align */
-text-align: left;
-text-align: right;
-text-align: center;
-text-align: justify;
-
-/* text-decoration */
-text-decoration: none;
-text-decoration: underline;
-text-decoration: overline;
-text-decoration: line-through;
-text-decoration: underline dotted red;  /* estilo e cor */
-
-/* text-transform */
-text-transform: none;
-text-transform: uppercase;    /* TODAS MAIUSCULAS */
-text-transform: lowercase;    /* todas minusculas */
-text-transform: capitalize;   /* Primeira Letra Maiuscula */
-
-/* text-indent */
-text-indent: 2em;
-text-indent: 40px;
-
-/* letter-spacing e word-spacing */
-letter-spacing: 2px;
-letter-spacing: -1px;
-word-spacing: 5px;
-
-/* white-space */
-white-space: normal;    /* quebra de linha normal */
-white-space: nowrap;    /* sem quebra */
-white-space: pre;       /* preserva espacos e quebras */
-white-space: pre-wrap;  /* preserva espacos, quebra quando necessario */
-white-space: pre-line;  /* preserva quebras, colapsa espacos */
-
-/* text-shadow */
-text-shadow: 2px 2px 4px #000;
-text-shadow: 1px 1px 0 #fff, 2px 2px 0 #000;  /* multiplas sombras */
-
-/* text-overflow */
-text-overflow: ellipsis;  /* ... quando texto e cortado */
-overflow: hidden;
-white-space: nowrap;
-</pre>
 
 <br><br>
 
-<hr>
 
 <h2>3.9 Box Model</h2>
 
-<p>O modelo de caixa (Box Model) e fundamental no CSS. Todo elemento HTML e tratado como uma caixa retangular composta por:</p>
+<br>
 
-<ol>
-    <li><strong>Content:</strong> O conteudo do elemento (texto, imagem, etc.)</li>
-    <li><strong>Padding:</strong> Espaco entre o conteudo e a borda</li>
-    <li><strong>Border:</strong> A borda ao redor do padding</li>
-    <li><strong>Margin:</strong> Espaco externo, entre a borda e outros elementos</li>
-</ol>
+<p>Todo elemento HTML e uma caixa composta por:</p>
+<ul>
+    <li><strong>Content</strong> - Conteudo do elemento</li>
+    <li><strong>Padding</strong> - Espaco interno entre conteudo e borda</li>
+    <li><strong>Border</strong> - Borda ao redor do padding</li>
+    <li><strong>Margin</strong> - Espaco externo ao redor da borda</li>
+</ul>
 
 <br>
 
-<pre>
-        +------------------------------------------+
-        |               MARGIN                     |
-        |   +----------------------------------+   |
-        |   |           BORDER                 |   |
-        |   |   +--------------------------+   |   |
-        |   |   |        PADDING           |   |   |
-        |   |   |   +------------------+   |   |   |
-        |   |   |   |                  |   |   |   |
-        |   |   |   |     CONTENT      |   |   |   |
-        |   |   |   |                  |   |   |   |
-        |   |   |   +------------------+   |   |   |
-        |   |   +--------------------------+   |   |
-        |   +----------------------------------+   |
-        +------------------------------------------+
-</pre>
-
-<br>
-
-<h3>3.9.1 Width e Height</h3>
-
-<pre>
-width: 300px;
-height: 200px;
-min-width: 100px;
-max-width: 800px;
-min-height: 50px;
-max-height: 600px;
-</pre>
-
-<br>
-
-<h3>3.9.2 Padding</h3>
-
-<pre>
-/* Todos os lados */
-padding: 20px;
-
-/* Vertical | Horizontal */
-padding: 10px 20px;
-
-/* Top | Horizontal | Bottom */
-padding: 10px 20px 30px;
-
-/* Top | Right | Bottom | Left (sentido horario) */
-padding: 10px 20px 30px 40px;
-
-/* Propriedades individuais */
-padding-top: 10px;
-padding-right: 20px;
-padding-bottom: 30px;
-padding-left: 40px;
-</pre>
-
-<br>
-
-<h3>3.9.3 Margin</h3>
-
-<pre>
-/* Mesma sintaxe do padding */
-margin: 20px;
-margin: 10px 20px;
-margin: 10px 20px 30px;
-margin: 10px 20px 30px 40px;
-
-margin-top: 10px;
-margin-right: 20px;
-margin-bottom: 30px;
-margin-left: 40px;
-
-/* Centralizar horizontalmente */
-margin: 0 auto;
-
-/* Margem negativa */
-margin-top: -10px;
-</pre>
-
-<br>
-
-<h3>3.9.4 Border</h3>
-
-<pre>
-/* Shorthand */
-border: 1px solid black;
-border: 2px dashed red;
-border: 3px dotted blue;
-
-/* Propriedades individuais */
-border-width: 1px;
-border-style: solid;  /* none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset */
-border-color: black;
-
-/* Lados individuais */
-border-top: 1px solid red;
-border-right: 2px dashed green;
-border-bottom: 3px dotted blue;
-border-left: 4px double orange;
-
-border-top-width: 1px;
-border-top-style: solid;
-border-top-color: black;
-
-/* Border radius */
-border-radius: 10px;
-border-radius: 50%;            /* circulo */
-border-radius: 10px 20px;      /* top-left/bottom-right | top-right/bottom-left */
-border-radius: 10px 20px 30px 40px;  /* cada canto */
-
-border-top-left-radius: 10px;
-border-top-right-radius: 20px;
-border-bottom-right-radius: 30px;
-border-bottom-left-radius: 40px;
-</pre>
-
-<br>
-
-<h3>3.9.5 Box-sizing</h3>
-
-<p>Por padrao, <code>width</code> e <code>height</code> se aplicam apenas ao conteudo. <code>box-sizing</code> muda esse comportamento:</p>
-
-<pre>
-/* Padrao: width/height = apenas conteudo */
-box-sizing: content-box;
-
-/* width/height = conteudo + padding + border */
-box-sizing: border-box;
-
-/* Reset comum */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-</pre>
-
-<br>
-
-<h3>3.9.6 Outline</h3>
-
-<p>Outline e similar a border, mas nao ocupa espaco no layout:</p>
-
-<pre>
-outline: 2px solid blue;
-outline-width: 2px;
-outline-style: solid;
-outline-color: blue;
-outline-offset: 5px;  /* espaco entre a borda e o outline */
-
-/* Remover outline de foco (cuidado com acessibilidade) */
-:focus {
-    outline: none;
-}
-</pre>
+<p><strong>box-sizing:</strong></p>
+<ul>
+    <li><code>content-box</code> - Width/height so inclui conteudo (padrao)</li>
+    <li><code>border-box</code> - Width/height inclui padding e border</li>
+</ul>
 
 <br><br>
 
-<hr>
 
-<h2>3.10 Background</h2>
+<h2>3.10 Display</h2>
 
 <br>
 
 <table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>background-color</code></td>
-        <td>Cor de fundo</td>
-        <td>Qualquer valor de cor</td>
-    </tr>
-    <tr>
-        <td><code>background-image</code></td>
-        <td>Imagem de fundo</td>
-        <td>url(), gradiente, none</td>
-    </tr>
-    <tr>
-        <td><code>background-repeat</code></td>
-        <td>Repeticao da imagem</td>
-        <td>repeat, repeat-x, repeat-y, no-repeat, space, round</td>
-    </tr>
-    <tr>
-        <td><code>background-position</code></td>
-        <td>Posicao da imagem</td>
-        <td>top, bottom, left, right, center, valores</td>
-    </tr>
-    <tr>
-        <td><code>background-size</code></td>
-        <td>Tamanho da imagem</td>
-        <td>auto, cover, contain, valores</td>
-    </tr>
-    <tr>
-        <td><code>background-attachment</code></td>
-        <td>Comportamento ao rolar</td>
-        <td>scroll, fixed, local</td>
-    </tr>
-    <tr>
-        <td><code>background-origin</code></td>
-        <td>Origem do posicionamento</td>
-        <td>padding-box, border-box, content-box</td>
-    </tr>
-    <tr>
-        <td><code>background-clip</code></td>
-        <td>Area de pintura</td>
-        <td>padding-box, border-box, content-box, text</td>
-    </tr>
+    <tr><th>Valor</th><th>Descricao</th></tr>
+    <tr><td><code>block</code></td><td>Ocupa toda a largura, quebra linha</td></tr>
+    <tr><td><code>inline</code></td><td>Ocupa so o necessario, sem quebra</td></tr>
+    <tr><td><code>inline-block</code></td><td>Inline mas aceita width/height</td></tr>
+    <tr><td><code>none</code></td><td>Remove o elemento</td></tr>
+    <tr><td><code>flex</code></td><td>Container flexbox</td></tr>
+    <tr><td><code>grid</code></td><td>Container grid</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* Cor de fundo */
-background-color: #f0f0f0;
-background-color: rgba(0, 0, 0, 0.5);
-
-/* Imagem de fundo */
-background-image: url('imagem.jpg');
-background-repeat: no-repeat;
-background-position: center center;
-background-size: cover;
-
-/* Shorthand */
-background: #f0f0f0 url('imagem.jpg') no-repeat center center / cover;
-
-/* Gradiente linear */
-background: linear-gradient(to right, red, blue);
-background: linear-gradient(45deg, red, yellow, green);
-background: linear-gradient(to bottom, #fff 0%, #000 100%);
-
-/* Gradiente radial */
-background: radial-gradient(circle, red, blue);
-background: radial-gradient(ellipse at center, red 0%, blue 100%);
-
-/* Multiplos backgrounds */
-background: 
-    url('topo.png') no-repeat top center,
-    url('fundo.png') no-repeat bottom center,
-    linear-gradient(to bottom, #fff, #ccc);
-</pre>
 
 <br><br>
 
-<hr>
 
-<h2>3.11 Display e Visibilidade</h2>
-
-<br>
-
-<h3>3.11.1 Display</h3>
-
-<table>
-    <tr>
-        <th>Valor</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>block</code></td>
-        <td>Ocupa toda a largura, quebra linha antes e depois</td>
-    </tr>
-    <tr>
-        <td><code>inline</code></td>
-        <td>Ocupa apenas o espaco necessario, nao quebra linha</td>
-    </tr>
-    <tr>
-        <td><code>inline-block</code></td>
-        <td>Inline mas aceita width/height</td>
-    </tr>
-    <tr>
-        <td><code>none</code></td>
-        <td>Remove completamente do fluxo</td>
-    </tr>
-    <tr>
-        <td><code>flex</code></td>
-        <td>Container flexbox</td>
-    </tr>
-    <tr>
-        <td><code>inline-flex</code></td>
-        <td>Flexbox inline</td>
-    </tr>
-    <tr>
-        <td><code>grid</code></td>
-        <td>Container grid</td>
-    </tr>
-    <tr>
-        <td><code>inline-grid</code></td>
-        <td>Grid inline</td>
-    </tr>
-    <tr>
-        <td><code>table</code></td>
-        <td>Comportamento de tabela</td>
-    </tr>
-    <tr>
-        <td><code>table-row</code></td>
-        <td>Comportamento de linha de tabela</td>
-    </tr>
-    <tr>
-        <td><code>table-cell</code></td>
-        <td>Comportamento de celula de tabela</td>
-    </tr>
-</table>
-
-<br>
-
-<h3>3.11.2 Visibilidade</h3>
-
-<pre>
-/* Esconde mas mantem espaco */
-visibility: hidden;
-visibility: visible;
-
-/* Remove do fluxo */
-display: none;
-
-/* Opacidade */
-opacity: 0;     /* invisivel mas interativo */
-opacity: 0.5;   /* 50% transparente */
-opacity: 1;     /* totalmente visivel */
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.12 Posicionamento</h2>
-
-<br>
-
-<h3>3.12.1 Propriedade Position</h3>
-
-<table>
-    <tr>
-        <th>Valor</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>static</code></td>
-        <td>Padrao. Segue o fluxo normal do documento</td>
-    </tr>
-    <tr>
-        <td><code>relative</code></td>
-        <td>Posicionado em relacao a sua posicao original</td>
-    </tr>
-    <tr>
-        <td><code>absolute</code></td>
-        <td>Posicionado em relacao ao ancestral posicionado mais proximo</td>
-    </tr>
-    <tr>
-        <td><code>fixed</code></td>
-        <td>Posicionado em relacao a viewport (janela)</td>
-    </tr>
-    <tr>
-        <td><code>sticky</code></td>
-        <td>Hibrido entre relative e fixed</td>
-    </tr>
-</table>
-
-<br>
-
-<pre>
-/* Static (padrao) */
-position: static;
-
-/* Relative - desloca da posicao original */
-position: relative;
-top: 10px;
-left: 20px;
-
-/* Absolute - remove do fluxo, posiciona em relacao ao pai posicionado */
-.pai {
-    position: relative;  /* cria contexto de posicionamento */
-}
-.filho {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-/* Fixed - fixo na viewport */
-.cabecalho-fixo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-/* Sticky - "gruda" ao rolar */
-.menu-sticky {
-    position: sticky;
-    top: 0;
-}
-
-/* Propriedades de posicao */
-top: 10px;
-right: 10px;
-bottom: 10px;
-left: 10px;
-
-/* Z-index (ordem de empilhamento) */
-z-index: 1;
-z-index: 100;
-z-index: -1;
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.13 Float e Clear</h2>
-
-<p>Float foi originalmente criado para permitir que texto fluisse ao redor de imagens. Hoje e menos usado devido ao Flexbox e Grid.</p>
-
-<br>
-
-<pre>
-/* Float */
-float: left;
-float: right;
-float: none;
-
-/* Clear - impede que elementos flutuem ao lado */
-clear: left;
-clear: right;
-clear: both;
-clear: none;
-
-/* Clearfix - limpa floats dentro de um container */
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.14 Flexbox</h2>
-
-<p>Flexbox e um modelo de layout unidimensional para organizar itens em linhas ou colunas.</p>
-
-<br>
-
-<h3>3.14.1 Propriedades do Container (pai)</h3>
-
-<table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>display</code></td>
-        <td>Ativa flexbox</td>
-        <td>flex, inline-flex</td>
-    </tr>
-    <tr>
-        <td><code>flex-direction</code></td>
-        <td>Direcao do eixo principal</td>
-        <td>row, row-reverse, column, column-reverse</td>
-    </tr>
-    <tr>
-        <td><code>flex-wrap</code></td>
-        <td>Quebra de linha</td>
-        <td>nowrap, wrap, wrap-reverse</td>
-    </tr>
-    <tr>
-        <td><code>flex-flow</code></td>
-        <td>Shorthand direction + wrap</td>
-        <td>row wrap</td>
-    </tr>
-    <tr>
-        <td><code>justify-content</code></td>
-        <td>Alinhamento no eixo principal</td>
-        <td>flex-start, flex-end, center, space-between, space-around, space-evenly</td>
-    </tr>
-    <tr>
-        <td><code>align-items</code></td>
-        <td>Alinhamento no eixo transversal</td>
-        <td>stretch, flex-start, flex-end, center, baseline</td>
-    </tr>
-    <tr>
-        <td><code>align-content</code></td>
-        <td>Alinhamento de multiplas linhas</td>
-        <td>stretch, flex-start, flex-end, center, space-between, space-around</td>
-    </tr>
-    <tr>
-        <td><code>gap</code></td>
-        <td>Espaco entre itens</td>
-        <td>Valor ou row-gap column-gap</td>
-    </tr>
-</table>
-
-<br>
-
-<h3>3.14.2 Propriedades dos Itens (filhos)</h3>
-
-<table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>order</code></td>
-        <td>Ordem de exibicao</td>
-        <td>Numero inteiro (padrao: 0)</td>
-    </tr>
-    <tr>
-        <td><code>flex-grow</code></td>
-        <td>Fator de crescimento</td>
-        <td>Numero (padrao: 0)</td>
-    </tr>
-    <tr>
-        <td><code>flex-shrink</code></td>
-        <td>Fator de encolhimento</td>
-        <td>Numero (padrao: 1)</td>
-    </tr>
-    <tr>
-        <td><code>flex-basis</code></td>
-        <td>Tamanho base</td>
-        <td>auto, valor com unidade</td>
-    </tr>
-    <tr>
-        <td><code>flex</code></td>
-        <td>Shorthand grow shrink basis</td>
-        <td>0 1 auto (padrao)</td>
-    </tr>
-    <tr>
-        <td><code>align-self</code></td>
-        <td>Alinhamento individual</td>
-        <td>auto, stretch, flex-start, flex-end, center, baseline</td>
-    </tr>
-</table>
-
-<br>
-
-<pre>
-/* Container */
-.container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Itens */
-.item {
-    flex: 1;              /* cresce igualmente */
-}
-
-.item-fixo {
-    flex: 0 0 200px;      /* nao cresce, nao encolhe, 200px */
-}
-
-.item-especial {
-    align-self: flex-end;
-    order: -1;            /* aparece primeiro */
-}
-</pre>
-
-<br>
-
-<h3>3.14.3 Exemplos Praticos de Flexbox</h3>
-
-<pre>
-/* Centralizar vertical e horizontalmente */
-.centralizado {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Navegacao responsiva */
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Cards em grade responsiva */
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.card {
-    flex: 1 1 300px;  /* cresce, encolhe, minimo 300px */
-}
-
-/* Footer fixo no fundo */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-main {
-    flex: 1;
-}
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.15 Grid</h2>
-
-<p>CSS Grid e um sistema de layout bidimensional que permite criar layouts complexos com linhas e colunas.</p>
-
-<br>
-
-<h3>3.15.1 Propriedades do Container Grid</h3>
-
-<table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>display</code></td>
-        <td>Ativa grid</td>
-        <td>grid, inline-grid</td>
-    </tr>
-    <tr>
-        <td><code>grid-template-columns</code></td>
-        <td>Define colunas</td>
-        <td>Valores de tamanho</td>
-    </tr>
-    <tr>
-        <td><code>grid-template-rows</code></td>
-        <td>Define linhas</td>
-        <td>Valores de tamanho</td>
-    </tr>
-    <tr>
-        <td><code>grid-template-areas</code></td>
-        <td>Define areas nomeadas</td>
-        <td>Nomes de areas</td>
-    </tr>
-    <tr>
-        <td><code>gap</code></td>
-        <td>Espaco entre celulas</td>
-        <td>row-gap column-gap</td>
-    </tr>
-    <tr>
-        <td><code>justify-items</code></td>
-        <td>Alinhamento horizontal dos itens</td>
-        <td>start, end, center, stretch</td>
-    </tr>
-    <tr>
-        <td><code>align-items</code></td>
-        <td>Alinhamento vertical dos itens</td>
-        <td>start, end, center, stretch</td>
-    </tr>
-    <tr>
-        <td><code>justify-content</code></td>
-        <td>Alinhamento do grid no container</td>
-        <td>start, end, center, space-between, space-around, space-evenly</td>
-    </tr>
-    <tr>
-        <td><code>align-content</code></td>
-        <td>Alinhamento vertical do grid</td>
-        <td>start, end, center, space-between, space-around, space-evenly</td>
-    </tr>
-</table>
-
-<br>
-
-<h3>3.15.2 Propriedades dos Itens Grid</h3>
-
-<table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>grid-column</code></td>
-        <td>Posicao/span em colunas</td>
-        <td>start / end ou span N</td>
-    </tr>
-    <tr>
-        <td><code>grid-row</code></td>
-        <td>Posicao/span em linhas</td>
-        <td>start / end ou span N</td>
-    </tr>
-    <tr>
-        <td><code>grid-area</code></td>
-        <td>Nome da area ou posicao</td>
-        <td>Nome ou row-start / col-start / row-end / col-end</td>
-    </tr>
-    <tr>
-        <td><code>justify-self</code></td>
-        <td>Alinhamento horizontal individual</td>
-        <td>start, end, center, stretch</td>
-    </tr>
-    <tr>
-        <td><code>align-self</code></td>
-        <td>Alinhamento vertical individual</td>
-        <td>start, end, center, stretch</td>
-    </tr>
-</table>
-
-<br>
-
-<pre>
-/* Grid basico */
-.container {
-    display: grid;
-    grid-template-columns: 200px 1fr 200px;
-    grid-template-rows: auto 1fr auto;
-    gap: 20px;
-}
-
-/* Usando repeat() */
-.grid-4-colunas {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-/* Grid responsivo com auto-fit */
-.grid-responsivo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* Grid com areas nomeadas */
-.layout {
-    display: grid;
-    grid-template-areas:
-        "header header header"
-        "sidebar main aside"
-        "footer footer footer";
-    grid-template-columns: 200px 1fr 200px;
-    grid-template-rows: auto 1fr auto;
-}
-
-.header { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.main { grid-area: main; }
-.aside { grid-area: aside; }
-.footer { grid-area: footer; }
-
-/* Item ocupando multiplas celulas */
-.item-grande {
-    grid-column: span 2;  /* ocupa 2 colunas */
-    grid-row: span 2;     /* ocupa 2 linhas */
-}
-
-.item-posicionado {
-    grid-column: 1 / 3;   /* da coluna 1 ate 3 */
-    grid-row: 2 / 4;      /* da linha 2 ate 4 */
-}
-</pre>
-
-<br>
-
-<h3>3.15.3 Funcoes Uteis do Grid</h3>
-
-<pre>
-/* repeat() - repete valores */
-grid-template-columns: repeat(3, 1fr);           /* 1fr 1fr 1fr */
-grid-template-columns: repeat(3, 100px 50px);    /* 100px 50px 100px 50px 100px 50px */
-
-/* minmax() - define minimo e maximo */
-grid-template-columns: minmax(100px, 1fr);
-grid-template-columns: repeat(3, minmax(200px, 1fr));
-
-/* auto-fit e auto-fill */
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* ajusta quantidade */
-grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* preenche espaco */
-
-/* fit-content() */
-grid-template-columns: fit-content(300px) 1fr;
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.16 Listas</h2>
+<h2>3.11 Posicionamento</h2>
 
 <br>
 
 <table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>list-style-type</code></td>
-        <td>Tipo de marcador</td>
-        <td>disc, circle, square, decimal, lower-alpha, upper-alpha, lower-roman, upper-roman, none</td>
-    </tr>
-    <tr>
-        <td><code>list-style-position</code></td>
-        <td>Posicao do marcador</td>
-        <td>inside, outside</td>
-    </tr>
-    <tr>
-        <td><code>list-style-image</code></td>
-        <td>Imagem como marcador</td>
-        <td>url(), none</td>
-    </tr>
-    <tr>
-        <td><code>list-style</code></td>
-        <td>Shorthand</td>
-        <td>type position image</td>
-    </tr>
+    <tr><th>Valor</th><th>Descricao</th></tr>
+    <tr><td><code>static</code></td><td>Posicao normal no fluxo (padrao)</td></tr>
+    <tr><td><code>relative</code></td><td>Relativo a posicao normal</td></tr>
+    <tr><td><code>absolute</code></td><td>Relativo ao ancestral posicionado</td></tr>
+    <tr><td><code>fixed</code></td><td>Relativo a viewport</td></tr>
+    <tr><td><code>sticky</code></td><td>Alterna entre relative e fixed</td></tr>
+</table>
+
+<p>Use <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> para posicionar.</p>
+
+<br><br>
+
+
+<h2>3.12 Flexbox</h2>
+
+<br>
+
+<h3>Propriedades do Container</h3>
+<table>
+    <tr><th>Propriedade</th><th>Valores</th></tr>
+    <tr><td><code>display</code></td><td>flex</td></tr>
+    <tr><td><code>flex-direction</code></td><td>row, column, row-reverse, column-reverse</td></tr>
+    <tr><td><code>justify-content</code></td><td>flex-start, center, flex-end, space-between, space-around</td></tr>
+    <tr><td><code>align-items</code></td><td>flex-start, center, flex-end, stretch, baseline</td></tr>
+    <tr><td><code>flex-wrap</code></td><td>nowrap, wrap, wrap-reverse</td></tr>
+    <tr><td><code>gap</code></td><td>Espaco entre itens</td></tr>
 </table>
 
 <br>
 
-<pre>
-/* Tipos de marcador */
-ul { list-style-type: disc; }      /* ponto solido (padrao) */
-ul { list-style-type: circle; }    /* circulo vazio */
-ul { list-style-type: square; }    /* quadrado */
-ul { list-style-type: none; }      /* sem marcador */
-
-ol { list-style-type: decimal; }       /* 1, 2, 3 */
-ol { list-style-type: lower-alpha; }   /* a, b, c */
-ol { list-style-type: upper-alpha; }   /* A, B, C */
-ol { list-style-type: lower-roman; }   /* i, ii, iii */
-ol { list-style-type: upper-roman; }   /* I, II, III */
-
-/* Posicao do marcador */
-ul { list-style-position: outside; }  /* fora do conteudo (padrao) */
-ul { list-style-position: inside; }   /* dentro do conteudo */
-
-/* Imagem como marcador */
-ul { list-style-image: url('marcador.png'); }
-
-/* Shorthand */
-ul { list-style: square inside; }
-ol { list-style: upper-roman outside; }
-
-/* Remover estilo padrao */
-ul, ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-</pre>
+<h3>Propriedades dos Itens</h3>
+<table>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>flex-grow</code></td><td>Fator de crescimento</td></tr>
+    <tr><td><code>flex-shrink</code></td><td>Fator de encolhimento</td></tr>
+    <tr><td><code>flex-basis</code></td><td>Tamanho base</td></tr>
+    <tr><td><code>align-self</code></td><td>Alinhamento individual</td></tr>
+    <tr><td><code>order</code></td><td>Ordem de exibicao</td></tr>
+</table>
 
 <br><br>
 
-<hr>
 
-<h2>3.17 Tabelas</h2>
+<h2>3.13 Grid</h2>
+
+<br>
+
+<h3>Propriedades do Container</h3>
+<table>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>display</code></td><td>grid</td></tr>
+    <tr><td><code>grid-template-columns</code></td><td>Define colunas (ex: 1fr 1fr 1fr)</td></tr>
+    <tr><td><code>grid-template-rows</code></td><td>Define linhas</td></tr>
+    <tr><td><code>gap</code></td><td>Espaco entre celulas</td></tr>
+    <tr><td><code>justify-items</code></td><td>Alinhamento horizontal dos itens</td></tr>
+    <tr><td><code>align-items</code></td><td>Alinhamento vertical dos itens</td></tr>
+</table>
+
+<br>
+
+<h3>Propriedades dos Itens</h3>
+<table>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>grid-column</code></td><td>Posicao/extensao em colunas</td></tr>
+    <tr><td><code>grid-row</code></td><td>Posicao/extensao em linhas</td></tr>
+    <tr><td><code>grid-area</code></td><td>Area nomeada ou posicao</td></tr>
+</table>
+
+<br><br>
+
+
+<h2>3.14 Background</h2>
 
 <br>
 
 <table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-        <th>Valores</th>
-    </tr>
-    <tr>
-        <td><code>border-collapse</code></td>
-        <td>Colapsa bordas das celulas</td>
-        <td>separate, collapse</td>
-    </tr>
-    <tr>
-        <td><code>border-spacing</code></td>
-        <td>Espaco entre celulas</td>
-        <td>Valor (horizontal vertical)</td>
-    </tr>
-    <tr>
-        <td><code>caption-side</code></td>
-        <td>Posicao da legenda</td>
-        <td>top, bottom</td>
-    </tr>
-    <tr>
-        <td><code>empty-cells</code></td>
-        <td>Exibicao de celulas vazias</td>
-        <td>show, hide</td>
-    </tr>
-    <tr>
-        <td><code>table-layout</code></td>
-        <td>Algoritmo de layout</td>
-        <td>auto, fixed</td>
-    </tr>
-    <tr>
-        <td><code>vertical-align</code></td>
-        <td>Alinhamento vertical em celulas</td>
-        <td>top, middle, bottom, baseline</td>
-    </tr>
+    <tr><th>Propriedade</th><th>Descricao</th></tr>
+    <tr><td><code>background-color</code></td><td>Cor de fundo</td></tr>
+    <tr><td><code>background-image</code></td><td>Imagem de fundo</td></tr>
+    <tr><td><code>background-repeat</code></td><td>Repeticao (repeat, no-repeat)</td></tr>
+    <tr><td><code>background-position</code></td><td>Posicao da imagem</td></tr>
+    <tr><td><code>background-size</code></td><td>Tamanho (cover, contain, valores)</td></tr>
 </table>
-
-<br>
-
-<pre>
-/* Estilo basico de tabela */
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-/* Linhas alternadas (zebra) */
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Hover em linhas */
-tr:hover {
-    background-color: #e0e0e0;
-}
-
-/* Tabela responsiva */
-.tabela-container {
-    overflow-x: auto;
-}
-
-/* Layout fixo (mais rapido) */
-table {
-    table-layout: fixed;
-}
-</pre>
 
 <br><br>
 
-<hr>
 
-<h2>3.18 Media Queries</h2>
-
-<p>Media queries permitem aplicar estilos diferentes com base nas caracteristicas do dispositivo.</p>
+<h2>3.15 Media Queries</h2>
 
 <br>
 
-<pre>
-/* Sintaxe basica */
-@media tipo and (condicao) {
-    /* estilos */
-}
+<p>Permitem aplicar estilos baseados em caracteristicas do dispositivo:</p>
 
-/* Largura maxima (mobile first = min-width) */
+<pre>
+/* Telas menores que 768px */
 @media (max-width: 768px) {
-    .container {
-        width: 100%;
-    }
+    .container { flex-direction: column; }
 }
 
-/* Largura minima */
-@media (min-width: 768px) {
-    .container {
-        width: 750px;
-    }
-}
-
-/* Combinando condicoes */
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* estilos para tablets */
-}
-
-/* Breakpoints comuns */
-/* Mobile: < 576px */
-/* Tablet: 576px - 768px */
-/* Desktop: 768px - 992px */
-/* Large Desktop: > 992px */
-
-@media (min-width: 576px) {
-    /* Small devices */
-}
-
-@media (min-width: 768px) {
-    /* Medium devices */
-}
-
-@media (min-width: 992px) {
-    /* Large devices */
-}
-
-@media (min-width: 1200px) {
-    /* Extra large devices */
-}
-
-/* Orientacao */
-@media (orientation: portrait) { /* retrato */ }
-@media (orientation: landscape) { /* paisagem */ }
-
-/* Impressao */
-@media print {
-    .no-print {
-        display: none;
-    }
-}
-
-/* Preferencias do usuario */
-@media (prefers-color-scheme: dark) {
-    /* modo escuro */
-}
-
-@media (prefers-reduced-motion: reduce) {
-    /* reduzir animacoes */
+/* Telas maiores que 1024px */
+@media (min-width: 1024px) {
+    .container { max-width: 1200px; }
 }
 </pre>
 
 <br><br>
 
-<hr>
 
-<h2>3.19 Transicoes e Animacoes</h2>
-
-<br>
-
-<h3>3.19.1 Transicoes</h3>
-
-<table>
-    <tr>
-        <th>Propriedade</th>
-        <th>Descricao</th>
-    </tr>
-    <tr>
-        <td><code>transition-property</code></td>
-        <td>Propriedade a ser animada</td>
-    </tr>
-    <tr>
-        <td><code>transition-duration</code></td>
-        <td>Duracao da transicao</td>
-    </tr>
-    <tr>
-        <td><code>transition-timing-function</code></td>
-        <td>Curva de aceleracao</td>
-    </tr>
-    <tr>
-        <td><code>transition-delay</code></td>
-        <td>Atraso antes de iniciar</td>
-    </tr>
-    <tr>
-        <td><code>transition</code></td>
-        <td>Shorthand</td>
-    </tr>
-</table>
+<h2>3.16 Transicoes e Animacoes</h2>
 
 <br>
 
+<h3>Transicoes</h3>
 <pre>
-/* Transicao basica */
 .botao {
-    background-color: blue;
     transition: background-color 0.3s ease;
 }
-
 .botao:hover {
-    background-color: red;
+    background-color: blue;
 }
-
-/* Multiplas transicoes */
-.card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* Timing functions */
-transition-timing-function: ease;        /* padrao */
-transition-timing-function: linear;      /* constante */
-transition-timing-function: ease-in;     /* comeca devagar */
-transition-timing-function: ease-out;    /* termina devagar */
-transition-timing-function: ease-in-out; /* devagar no inicio e fim */
-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 </pre>
 
 <br>
 
-<h3>3.19.2 Animacoes</h3>
-
+<h3>Animacoes</h3>
 <pre>
-/* Definir keyframes */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+@keyframes pulsar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-@keyframes slide {
-    0% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(10%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-/* Aplicar animacao */
 .elemento {
-    animation: fadeIn 1s ease-in-out;
-}
-
-/* Propriedades de animacao */
-animation-name: fadeIn;
-animation-duration: 1s;
-animation-timing-function: ease-in-out;
-animation-delay: 0.5s;
-animation-iteration-count: infinite;  /* ou numero */
-animation-direction: normal;          /* reverse, alternate, alternate-reverse */
-animation-fill-mode: forwards;        /* none, forwards, backwards, both */
-animation-play-state: running;        /* paused */
-
-/* Shorthand */
-animation: fadeIn 1s ease-in-out 0.5s infinite alternate;
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.20 Transform</h2>
-
-<p>Transform permite modificar a aparencia de um elemento sem afetar o layout.</p>
-
-<br>
-
-<pre>
-/* Translacao (mover) */
-transform: translateX(50px);
-transform: translateY(50px);
-transform: translate(50px, 100px);
-transform: translateZ(50px);       /* 3D */
-transform: translate3d(x, y, z);
-
-/* Rotacao */
-transform: rotate(45deg);
-transform: rotateX(45deg);         /* 3D */
-transform: rotateY(45deg);         /* 3D */
-transform: rotateZ(45deg);         /* 3D */
-transform: rotate3d(x, y, z, angle);
-
-/* Escala */
-transform: scale(1.5);             /* ambos eixos */
-transform: scaleX(1.5);
-transform: scaleY(0.5);
-transform: scale(1.5, 0.5);
-transform: scale3d(x, y, z);
-
-/* Inclinacao (skew) */
-transform: skewX(20deg);
-transform: skewY(20deg);
-transform: skew(20deg, 10deg);
-
-/* Combinando transformacoes */
-transform: translate(50px, 50px) rotate(45deg) scale(1.2);
-
-/* Origem da transformacao */
-transform-origin: center;          /* padrao */
-transform-origin: top left;
-transform-origin: 50% 50%;
-transform-origin: 0 0;
-
-/* 3D */
-perspective: 1000px;               /* no container */
-transform-style: preserve-3d;      /* mantem contexto 3D */
-backface-visibility: hidden;       /* esconde face traseira */
-</pre>
-
-<br><br>
-
-<hr>
-
-<h2>3.21 Variaveis CSS (Custom Properties)</h2>
-
-<p>Variaveis CSS permitem armazenar valores para reutilizacao.</p>
-
-<br>
-
-<pre>
-/* Definir variaveis (geralmente no :root) */
-:root {
-    --cor-primaria: #3498db;
-    --cor-secundaria: #2ecc71;
-    --cor-texto: #333;
-    --fonte-principal: 'Arial', sans-serif;
-    --espacamento: 20px;
-    --border-radius: 8px;
-}
-
-/* Usar variaveis */
-.botao {
-    background-color: var(--cor-primaria);
-    color: white;
-    padding: var(--espacamento);
-    border-radius: var(--border-radius);
-    font-family: var(--fonte-principal);
-}
-
-/* Valor fallback */
-color: var(--cor-texto, black);
-
-/* Variaveis locais */
-.card {
-    --card-padding: 15px;
-    padding: var(--card-padding);
-}
-
-/* Variaveis em media queries */
-:root {
-    --tamanho-fonte: 16px;
-}
-
-@media (min-width: 768px) {
-    :root {
-        --tamanho-fonte: 18px;
-    }
-}
-
-body {
-    font-size: var(--tamanho-fonte);
+    animation: pulsar 2s infinite;
 }
 </pre>
 
 <br><br>
-
-
-<br><br>
-
+	
 </body>
 </html>
