@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<head>
+  <title>Resumo — Capítulo 4: JavaScript</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>Capítulo 4 — Tornando Páginas Web Interativas com JavaScript</h1>
+  
+  <h2>1. Introdução ao JavaScript</h2>
+
+  <p>
+    JavaScript é uma das três linguagens fundamentais da web, ao lado de HTML e CSS. Enquanto o HTML estrutura o conteúdo e o CSS cuida da aparência, o JavaScript é responsável por adicionar comportamento dinâmico e interatividade às páginas. O padrão da linguagem é chamado de <strong>ECMAScript</strong>, gerenciado pela Ecma International, e é publicado anualmente desde 2015.
+<pre><h3>
+    console.log("Olá, mundo!");
+    console.log("JavaScript deixa a página interativa.");
+</h3>
+</pre>
+  </p>
+
+
+  <h2>2. Como Incluir JavaScript em uma Página</h2>
+  <p>
+    Existem duas formas principais de incluir JavaScript em uma página HTML. A forma recomendada é criar um arquivo externo com a extensão <code>.js</code> e referenciá-lo no HTML usando o elemento <code>&lt;script src="caminho/arquivo.js"&gt;&lt;/script&gt;</code>. Isso mantém o código organizado e permite reutilizá-lo em diferentes páginas.
+  </p>
+  <p>
+    A segunda forma é escrever o código diretamente dentro de uma tag <code>&lt;script&gt;</code> no próprio HTML, mas essa abordagem não é recomendada porque mistura as responsabilidades do HTML e do JavaScript em um único arquivo.
+  </p>
+  <p>
+    Há ainda o elemento <code>&lt;noscript&gt;</code>, que exibe um conteúdo alternativo para o usuário caso o navegador não suporte JavaScript ou ele esteja desativado.
+<h3>JS Interno</h3>
+<pre><h3>
+&lt;script&gt;
+    console.log("Código diretamente no HTML");
+&lt;/script&gt;
+</h2></pre>
+   
+<h3>JS Externo</h2>
+
+<pre><h3>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;JS Externo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;Página&lt;/h1&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</h3></pre>   
+  </p>
+
+
+  <h2>3. Exibindo Caixas de Diálogo</h2>
+  <p>
+    JavaScript oferece três funções nativas para exibir caixas de diálogo no navegador. A função <code>alert()</code> exibe uma mensagem simples. A função <code>confirm()</code> exibe uma mensagem com opções de confirmar ou cancelar. A função <code>prompt()</code> abre uma caixa onde o usuário pode digitar um texto. Na prática, essas funções são pouco usadas porque têm aparência limitada e não podem ser estilizadas.
+  </p>
+
+
+  <h2>4. Console do Desenvolvedor</h2>
+  <p>
+    Todos os navegadores modernos oferecem um console de desenvolvedor que pode ser acessado pelas ferramentas de desenvolvimento. Ele é extremamente útil para testar e depurar código JavaScript. Por meio do objeto <code>console</code>, é possível enviar mensagens diretamente para esse console sem a necessidade de caixas de diálogo. Os métodos mais utilizados são:
+  </p>
+  <p>
+    <code>console.log()</code>  mensagem normal; <code>console.warn()</code> aviso; <code>console.error()</code>  erro; <code>console.info()</code>  informação; <code>console.debug()</code>  mensagem de depuração; <code>console.clear()</code>  limpa o console.
+  </p>
+
+
+
+  <h2>5. Variáveis e Constantes</h2>
+  <p>
+    Variáveis são espaços na memória usados para armazenar valores que podem mudar durante a execução do programa. Em JavaScript, variáveis são declaradas com a palavra-chave <code>let</code>. Já as constantes, declaradas com <code>const</code>, recebem um valor uma única vez e não podem ser alteradas depois. Por convenção, constantes são escritas em letras maiúsculas, como <code>const MAXIMO = 5000</code>.
+  </p>
+
+ 
+
+  <h2>6. Tipos de Dados</h2>
+  <p>
+    JavaScript possui seis tipos de dados principais. Os três tipos primitivos mais comuns são: <strong>number</strong> (números inteiros e decimais, positivos ou negativos), <strong>string</strong> (sequências de texto delimitadas por aspas simples, duplas ou backticks) e <strong>boolean</strong> (valores lógicos <code>true</code> ou <code>false</code>). Além desses, existem os tipos especiais <code>null</code> e <code>undefined</code>, e o tipo <strong>object</strong>, que serve para representar estruturas de dados mais complexas.
+  </p>
+  <p>
+    Uma boa prática é usar <code>const</code> sempre que o valor de uma variável não precisar ser alterado. As <em>template strings</em> (criadas com backticks) permitem inserir valores de variáveis diretamente no texto usando a sintaxe <code>${variavel}</code>.
+
+<pre><code><h3>let numero = 1;
+let texto = "Nome";
+let ativo = true;
+
+let vazio = null;
+let indefinido;
+
+let pessoa = {
+    nome: "fulano",
+    idade: 25
+};
+</h3></code></pre>   
+  
+</p>
+
+  
+
+  <h2>7. Operadores</h2>
+  <p>
+    Os operadores permitem trabalhar com os valores armazenados em variáveis e constantes. Os principais tipos são:
+  </p>
+  <p>
+    <strong>Aritméticos:</strong> realizam cálculos matemáticos — adição (<code>+</code>), subtração (<code>-</code>), multiplicação (<code>*</code>), divisão (<code>/</code>), módulo (<code>%</code>), potência (<code>**</code>), incremento (<code>++</code>) e decremento (<code>--</code>).
+  </p>
+  <p>
+    <strong>Atribuição:</strong> o operador <code>=</code> atribui um valor a uma variável.
+  </p>
+  <p>
+    <strong>Concatenação:</strong> o operador <code>+</code> também une duas strings em uma só.
+  </p>
+  <p>
+    <strong>Lógicos:</strong> <code>&amp;&amp;</code> (E lógico), <code>||</code> (OU lógico) e <code>!</code> (negação) trabalham com valores booleanos.
+  </p>
+  <p>
+    <strong>Comparação:</strong> <code>==</code>, <code>===</code>, <code>!=</code>, <code>!==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> comparam valores e retornam um booleano.
+  </p>
+
+  
+
+  <h2>8. Estruturas de Controle — Condicionais</h2>
+  <p>
+    As estruturas condicionais permitem que o programa tome decisões com base em condições. A instrução <code>if</code> executa um bloco de código se a condição for verdadeira. Com <code>else</code>, define-se o que acontece quando a condição é falsa. É possível encadear múltiplas condições com <code>else if</code>.
+  </p>
+  <p>
+    Para situações com muitos caminhos possíveis com base no valor de uma variável, usa-se o <code>switch</code>, que avalia o valor e executa o bloco correspondente ao <code>case</code> que combinar. O <code>break</code> encerra a execução do bloco atual, evitando que os blocos seguintes também sejam executados. O bloco <code>default</code> é executado quando nenhum case coincide.
+ 
+<pre><code><h3>
+If Else:
+let nota = 7;
+
+if (nota &gt;= 9) {
+    console.log("Aprovado");
+} else if (nota &gt;= 6) {
+    console.log("Aprovado");
+} else {
+    console.log("Reprovado");
+}
+</h3></code></pre>
+
+<pre><code>
+<h3>
+switch:
+
+let opcao = 3;
+
+switch(opcao) {
+    case 1:
+        console.log("oção1");
+        break;
+
+    case 2:
+        console.log("oção2");
+        break;
+
+    case 3:
+        console.log("oção3");
+        break;
+
+    default:
+        console.log("opção inválida");
+}
+</h3>
+</code></pre>   
+
+ </p>
+
+  
+
+  <h2>9. Estruturas de Controle — Laços de Repetição</h2>
+  <p>
+    Os laços (loops) permitem executar um bloco de código repetidamente. Existem três tipos em JavaScript:
+  </p>
+  <p>
+    <strong>for:</strong> o laço de contagem clássico. Usa um contador inicializado, uma condição de parada e uma expressão de incremento. Ideal quando se sabe de antemão quantas vezes o código deve repetir.
+  </p>
+  <p>
+    <strong>while:</strong> o laço controlado pelo cabeçalho. Verifica a condição antes de cada iteração — se a condição já for falsa no início, o bloco nunca é executado.
+  </p>
+  <p>
+    <strong>do...while:</strong> o laço controlado pelo rodapé. Executa o bloco ao menos uma vez e só então verifica a condição.
+
+<pre><code><h3>
+Exemplos:
+
+For
+for(let i = 1; i &lt;= 5; i++) {
+    console.log(i);
+}
+
+while
+
+let contador = 1;
+while(contador &lt;= 5) {
+    console.log(contador);
+    contador++;
+}
+
+
+do while
+
+let numero = 1;
+do {
+    console.log(numero);
+    numero++;
+} while(numero &lt;= 5);
+</h3>
+</code></pre>     
+
+</p>
+
+  
+
+  <h2>10. Funções</h2>
+  <p>
+    Funções são blocos de código reutilizáveis que podem ser chamados em diferentes partes do programa. Existem três formas de criá-las: a <em>function declaration</em> (usando a palavra-chave <code>function</code> seguida de um nome), a <em>function expression</em> (armazenando uma função anônima em uma variável) e as <em>arrow functions</em> (uma forma mais curta, usando <code>=&gt;</code>).
+  </p>
+  <p>
+    Funções podem receber valores por meio de <strong>parâmetros</strong> e devolver resultados por meio da palavra-chave <code>return</code>. Isso torna as funções extremamente flexíveis e reutilizáveis, pois o mesmo código pode operar sobre dados diferentes a cada chamada.
+ 
+<pre><code><h3>
+Exemplo de função com boas vindas:
+
+function saudacao() {
+    console.log("Olá fulano");
+}
+
+saudacao();
+</h3></code></pre>   
+
+ </p>
+
+  
+
+  <h2>11. Tratamento de Erros</h2>
+  <p>
+    Durante a execução de um programa, diferentes tipos de erros podem ocorrer. Os <strong>erros de sintaxe</strong> surgem quando as regras gramaticais da linguagem são violadas (ex: esquecer um parêntese). Os <strong>erros de runtime</strong> ocorrem durante a execução, como tentar acessar uma variável que não existe. Os <strong>erros lógicos</strong> (bugs) acontecem quando o código roda sem falhas, mas produz um resultado incorreto por falha na lógica.
+  </p>
+  <p>
+    Para lidar com erros de runtime, usa-se o bloco <code>try...catch</code>: o código que pode gerar erro fica dentro de <code>try</code>, e caso um erro ocorra, o bloco <code>catch</code> é executado, recebendo o objeto de erro com informações sobre o problema. Erros também podem ser lançados manualmente com a instrução <code>throw new Error("mensagem")</code>.
+  </p>
+
+  
+
+  <h2>12. Objetos</h2>
+  <p>
+    Objetos permitem agrupar dados relacionados em uma única estrutura. Na notação literal, um objeto é criado com chaves <code>{}</code>, contendo pares de chave e valor chamados <strong>propriedades</strong>. Além de propriedades, objetos podem ter <strong>métodos</strong>, que são funções associadas ao objeto. Para acessar propriedades e métodos, usa-se a notação de ponto (<code>objeto.propriedade</code>). Dentro de um método, a palavra-chave <code>this</code> faz referência ao próprio objeto.
+  </p>
+
+  
+
+  <h2>13. Arrays</h2>
+  <p>
+    Arrays são listas que armazenam múltiplos valores em sequência. São criados com colchetes <code>[]</code> e cada elemento é acessado por seu índice numérico, que começa em zero. Novos elementos podem ser adicionados com o método <code>push()</code> ou diretamente pelo índice. Arrays trabalham muito bem em conjunto com laços <code>for</code>, percorrendo cada elemento da lista.
+  </p>
+  <p>
+    Os principais métodos de arrays são: <code>push()</code> e <code>pop()</code> (adicionar/remover no final), <code>shift()</code> e <code>unshift()</code> (remover/adicionar no início), <code>filter()</code> (filtrar elementos), <code>map()</code> (transformar elementos), <code>forEach()</code> (iterar), <code>sort()</code> (ordenar), <code>reverse()</code> (inverter) e <code>join()</code> (converter em string).
+  
+
+<pre><code><h3>
+Declaração e manipulação de Array, Exemplo:
+
+let numeros = [10, 20, 30];
+
+console.log(numeros[0]); 
+console.log(numeros[1]); 
+
+
+numeros.push(40); 
+numeros.unshift(5);
+
+
+numeros.pop();
+numeros.shift(); 
+
+</h3>
+</code></pre>   
+</p>
+
+
+</body>
+</html>
